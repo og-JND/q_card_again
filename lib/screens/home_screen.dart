@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:q_card_again/const/constants.dart';
-import 'package:q_card_again/custom_widgets.dart';
-import 'package:q_card_again/screens/create_screen.dart';
-import 'package:q_card_again/screens/scan_screen.dart';
+import 'package:QCard/const/constants.dart';
+import 'package:QCard/custom_widgets.dart';
+import 'package:QCard/screens/create_screen.dart';
+import 'package:QCard/screens/scan_screen.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 

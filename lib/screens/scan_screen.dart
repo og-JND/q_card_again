@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../const/ad_helper.dart';
 import '../const/constants.dart';
 
 class ScanScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class ScanScreen extends StatefulWidget {
 }
 
 class _ScanScreenState extends State<ScanScreen> {
+
 
   String tester = """
   Your scanned result will show up here.
@@ -28,8 +30,16 @@ class _ScanScreenState extends State<ScanScreen> {
           )));
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    final BannerAd myBanner = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(),
+    );
+    myBanner.load();
     var screenSize = MediaQuery.of(context).size;
     Future<void> scanQR() async {
       String barcodeScanRes;
@@ -84,25 +94,29 @@ class _ScanScreenState extends State<ScanScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
-              child: SizedBox(
-                  height: screenSize.height * 0.25,
-                  width: screenSize.width,
-                  child: Container(
-                    color: Colors.black87,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                          result,
-                          style: TextDesigns.SCANNEDTEXT,
-                          overflow: TextOverflow.fade,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: SizedBox(
+                    height: screenSize.height * 0.25,
+                    width: screenSize.width,
+                    child: Container(
+                      color: Colors.black87,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                            result,
+                            style: TextDesigns.SCANNEDTEXT,
+                            overflow: TextOverflow.fade,
+                        ),
                       ),
-                    ),
-                  )),
+                    )),
+              ),
             ),
              IconButton(
                   onPressed: () => copyShit(),
-                  icon: Icon(Icons.copy),
-                  color: DesignConstants.RICHBLACK,
+                  //child: Text('Copy'),
+                  icon: Icon(Icons.copy_rounded),
+                  // color: DesignConstants.RICHBLACK,
               ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -136,11 +150,11 @@ class _ScanScreenState extends State<ScanScreen> {
 
             Spacer(),
             SizedBox(
-              height: 80,
+              height: 50,
               width: screenSize.width,
               child: Container(
                 alignment: Alignment.bottomCenter,
-                color: Colors.black,
+                child: AdWidget(ad: myBanner),
               ),
             )
           ],

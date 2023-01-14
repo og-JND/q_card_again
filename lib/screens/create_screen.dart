@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import '../const/ad_helper.dart';
 import '../const/constants.dart';
 
 class CreateScreen extends StatefulWidget {
@@ -23,6 +25,10 @@ class _CreateScreenState extends State<CreateScreen> {
       Qrguy = QrImage(
         padding: EdgeInsets.all(15),
         data: data,
+        embeddedImage: AssetImage('assets/img/icon192.png'),
+      embeddedImageStyle: QrEmbeddedImageStyle(
+      size: Size(30, 30),
+      ),
         version: QrVersions.auto,
         size: 225.0,
         semanticsLabel: data,
@@ -43,6 +49,13 @@ class _CreateScreenState extends State<CreateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final BannerAd myBanner = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      size: AdSize.banner,
+      request: AdRequest(),
+      listener: BannerAdListener(),
+    );
+    myBanner.load();
     var screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Container(
@@ -103,11 +116,11 @@ class _CreateScreenState extends State<CreateScreen> {
                 ),
                 Spacer(),
                 SizedBox(
-                  height: 80,
+                  height: 50,
                   width: screenSize.width,
                   child: Container(
                     alignment:Alignment.bottomCenter,
-                    color: Colors.black,
+                    child: AdWidget(ad: myBanner),
                   ),
                 )
               ],

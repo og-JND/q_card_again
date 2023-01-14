@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:q_card_again/const/constants.dart';
-import 'package:q_card_again/screens/home_screen.dart';
-import 'package:q_card_again/screens/create_screen.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:QCard/const/constants.dart';
+import 'package:QCard/screens/home_screen.dart';
+import 'package:QCard/screens/create_screen.dart';
+import 'package:QCard/screens/splash_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -18,12 +20,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Future<InitializationStatus> _initGoogleMobileAds() {
+      // TODO: Initialize Google Mobile Ads SDK
+      return MobileAds.instance.initialize();
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Coolvetica',
       ),
-      home: HomeScreen(),
+      home: SplashPage(),
 
     );
   }
