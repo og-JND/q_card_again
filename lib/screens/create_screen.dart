@@ -10,6 +10,7 @@ class CreateScreen extends StatefulWidget {
 }
 
 class _CreateScreenState extends State<CreateScreen> {
+  String imageData = '';
   Widget Qrguy = QrImage(
     data: "Made by Jedidiah Dennis.",
     padding: EdgeInsets.all(15),
@@ -45,55 +46,73 @@ class _CreateScreenState extends State<CreateScreen> {
     var screenSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Container(
-          height: screenSize.height,
-          width: screenSize.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  'Create a code...',
-                  style: TextDesigns.HEADERTEXT,
-                ),
-              ),
-              Divider(
-                endIndent: 25,
-                indent: 25,
-                color: DesignConstants.RICHBLACK,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(
-                  'Enter the data you wish to convert to a QR Code',
-                  style: TextDesigns.BODYTEXT,
-                ),
-              ),
-              Center(
-                child: Qrguy,
-              ),
-              Divider(
-                thickness: 0.7,
-                endIndent: 18,
-                indent: 18,
-                color: DesignConstants.RICHBLACK,
-              ),
-              SizedBox(
-                height: screenSize.height * 0.03,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 8),
-                child: TextField(
-                  onSubmitted: (text) => setState(() {
-                    createQr(text);
-                  }),
-                  //expands: true,
-                  decoration: InputDecoration(
-                    hintText: 'type here...',
+            height: screenSize.height,
+            width: screenSize.width,
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    'Create a code...',
+                    style: TextDesigns.HEADERTEXT,
                   ),
                 ),
-              ),
-            ],
-          )),
+                Divider(
+                  thickness: 0.5,
+                  endIndent: 25,
+                  indent: 25,
+                  color: DesignConstants.RICHBLACK,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    'Enter the data you wish to convert to a QR code.',
+                    style: TextDesigns.BODYTEXT,
+                  ),
+                ),
+                Center(
+                      child: Qrguy
+                ),
+                Divider(
+                  thickness: 0.7,
+                  endIndent: 18,
+                  indent: 18,
+                  color: DesignConstants.RICHBLACK,
+                ),
+                SizedBox(
+                  height: screenSize.height * 0.01,
+                ),
+                  SizedBox(
+                    width: screenSize.width*0.9,
+                    child: TextField(
+                      onSubmitted: (text) => setState(() {
+                        createQr(text);
+                      }),
+                      //expands: true,
+                      decoration: InputDecoration(
+                        hintText: 'type here...',
+                      ),
+                    ),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      'You can screenshot your created code to save it for later...',
+                      style: TextDesigns.HINTTEXT,
+                  ),
+                ),
+                Spacer(),
+                SizedBox(
+                  height: 80,
+                  width: screenSize.width,
+                  child: Container(
+                    alignment:Alignment.bottomCenter,
+                    color: Colors.black,
+                  ),
+                )
+              ],
+            )
+      ),
     );
   }
 }

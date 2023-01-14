@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: DesignConstants.WHITE,
       bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: TextDesigns.NAVTEXT,
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             navItem('Create'),
           ]
       ),
-      body: PAGES.elementAt(navIndex)
+      body: SafeArea(child: PAGES.elementAt(navIndex))
     );
   }
 }

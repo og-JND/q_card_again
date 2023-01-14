@@ -27,6 +27,27 @@ class TextDesigns{
     letterSpacing: 1,
     color: DesignConstants.RICHBLACK,
   );
+  static TextStyle BUTTONTEXT = TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.w100,
+  wordSpacing: 1,
+  letterSpacing: 1,
+  color: DesignConstants.RICHBLACK,
+  );
+  static TextStyle SCANNEDTEXT = TextStyle(
+    fontSize: 20,
+    wordSpacing: 1,
+    letterSpacing: 0.25,
+    color: DesignConstants.WHITE,
+  );
+  static TextStyle HINTTEXT = TextStyle(
+    fontSize: 18,
+    wordSpacing: 1,
+    letterSpacing: 0.3,
+    decoration: TextDecoration.underline,
+    decorationColor: DesignConstants.RICHBLACK,
+    color: DesignConstants.BROWN,
+  );
 }
 
 const Map<String, dynamic> IconMap ={
